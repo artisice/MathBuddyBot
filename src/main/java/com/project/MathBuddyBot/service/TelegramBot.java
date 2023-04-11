@@ -47,6 +47,9 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = update.getMessage().getChatId();
 
             switch (messageText) {
+                case "/start":
+                    sendMessage(chatId, "Решай примеры и качай мозг");
+                    break;
                 case "/solve":
                     try {
                         MathExpressions.getInfo(model);
@@ -70,6 +73,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                             counter = 0;
                         }
                     }
+                    break;
 
             }
 
