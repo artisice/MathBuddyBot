@@ -2,6 +2,7 @@ package com.project.MathBuddyBot.service;
 
 import com.project.MathBuddyBot.MathExpressions;
 import com.project.MathBuddyBot.Model;
+import com.project.MathBuddyBot.QuadraticEquations;
 import com.project.MathBuddyBot.config.BotConfig;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -13,6 +14,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -59,6 +61,15 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                         sendMessage(chatId, "Найди значение: " + model.getExpression());
                     break;
+                case "/quadEquations":
+                    try {
+                        QuadraticEquations.getQuad(model);
+                        answerContainer = String.valueOf(Collections.min(model.getRoots()));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    sendMessage(chatId, "Найди минимальный корень: " + model.getExpression());
+                    break;
                 case "/rate":
                     sendMessage(chatId, "Ваш максимальный счёт: " + maxRate);
                     break;
@@ -92,6 +103,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         KeyboardRow row = new KeyboardRow();
 
         row.add("/solve");
+        row.add("/quadEquations");
         row.add("/rate");
 
         keyboardRowList.add(row);
