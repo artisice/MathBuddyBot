@@ -68,13 +68,13 @@ public class TelegramBot extends TelegramLongPollingBot {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    sendMessage(chatId, "Найди минимальный корень: " + model.getExpression());
+                    sendMessage(chatId, "Найди минимальный корень и округли до целого числа: " + model.getExpression());
                     break;
                 case "/rate":
                     sendMessage(chatId, "Ваш максимальный счёт: " + maxRate);
                     break;
                 default:
-                    if (messageText.equals(answerContainer)) {
+                    if (messageText.equals(String.valueOf(Integer.valueOf(Math.round(Float.parseFloat(answerContainer)))))) {
                         counter += 1;
                         sendMessage(chatId, "Верно");
                     } else {

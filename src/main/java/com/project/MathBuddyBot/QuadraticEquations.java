@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class QuadraticEquations {
     public static void getQuad(Model model) throws IOException {
 
-        URL url = new URL("https://shadify.dev/api/math/quad/?max-a=1&max-b=20&max-c=5&negative=0");
+        URL url = new URL("https://shadify.dev/api/math/quad/?max-a=2&max-b=9&max-c=3&min-c=-9&negative=0");
 
         Scanner in = new Scanner((InputStream) url.getContent());
         String result = "";
